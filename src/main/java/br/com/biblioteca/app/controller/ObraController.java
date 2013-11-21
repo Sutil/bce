@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,31 +31,31 @@ import com.mysema.query.BooleanBuilder;
 
 @Controller
 public class ObraController {
-	
+
 	@Autowired
 	private ObraRepository obraRepository;
-	
+
 	@Autowired
 	private AutorRepository autorRepository;
-	
+
 	@Autowired
 	private ExemplarRepository exemplarRepository;
-	
-	public ObraBean novo(){
+
+	public ObraBean novo() {
 		return new ObraBean();
 	}
-	
-	public List<Categoria> getCategorias(){
+
+	public List<Categoria> getCategorias() {
 		return new ArrayList<Categoria>(Categoria.getMapvalues().values());
 	}
-	
-	public List<DisposicaoParaEmprestimo> getDisposicoes(){
+
+	public List<DisposicaoParaEmprestimo> getDisposicoes() {
 		return new ArrayList<DisposicaoParaEmprestimo>(DisposicaoParaEmprestimo.getMapValues().values());
 	}
-	
-	public List<Autor> completeAutores(String value){
+
+	public List<Autor> completeAutores(String value) {
 		List<Autor> autores = Lists.newLinkedList();
-		if(!Strings.isNullOrEmpty(value)){
+		if (!Strings.isNullOrEmpty(value)) {
 			BooleanBuilder builderBusca = new BooleanBuilder();
 			builderBusca.or(QAutor.autor.nome.containsIgnoreCase(value));
 			builderBusca.or(QAutor.autor.sobrenome.containsIgnoreCase(value));
@@ -63,15 +65,15 @@ public class ObraController {
 		}
 		return autores;
 	}
-	
-	public List<Obra> pesquisar(){
+
+	public List<Obra> pesquisar() {
 		return obraRepository.findAll();
 	}
-	
-	public List<Exemplar> addExemplar(ObraBean bean, DataModel<Exemplar> model){
+
+	public List<Exemplar> addExemplar(ObraBean bean, DataModel<Exemplar> model) {
 		Iterator<Exemplar> iterator = model.iterator();
 		List<Exemplar> exemplares = Lists.newArrayList();
-		while(iterator.hasNext()){
+		while (iterator.hasNext()) {
 			exemplares.add(iterator.next());
 		}
 		Exemplar exemplar = new Exemplar();
@@ -79,25 +81,56 @@ public class ObraController {
 		exemplares.add(exemplar);
 		return exemplares;
 	}
-	
-	private Integer geraCodigo(List<Exemplar> exemplares){
+
+	private Integer geraCodigo(List<Exemplar> exemplares) {
 		Integer codigo = 1;
-		for(Exemplar e : exemplares){
-			if(e != null && e.getIdentificador().compareTo(codigo) >= 0){
+		for (Exemplar e : exemplares) {
+			if (e != null && e.getIdentificador().compareTo(codigo) >= 0) {
 				codigo = e.getIdentificador() + 1;
 			}
 		}
 		return codigo;
 	}
-	
+
 	@Transactional
-	public void save(ObraBean bean){
-		Obra obra = Obra.newInstance(bean);
-		obraRepository.save(obra);
+	public void save(ObraBean bean, DataModel<Exemplar> model) {
+		try {
+			Iterator<Exemplar> i = model.iterator();
+			List<Exemplar> exemplares = Lists.newArrayList();
+			while (i.hasNext()) {
+				exemplares.add(i.next());
+			}
+			bean.setExemplares(exemplares);
+			Obra obra = Obra.newInstance(bean);
+			Obra saved = obraRepository.save(obra);
+			if(saved != null){
+				addMessageInfo("Salvo com sucesso", "obra salva com id "+saved.getId());
+			}
+			else{
+				addMessageError("Erro", "Não foi possível salvar obra");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			addMessageError("Erro ao salvar obra", e.getMessage());
+		}
 	}
 	
-	
-	
-	
+	public ObraBean editarObra(Obra obra){
+		try{
+			return new ObraBean(obra);
+		}
+		catch(Exception e){
+			addMessageError("Erro", e.getMessage());
+			return new ObraBean();
+		}
+	}
+
+	private void addMessageError(String title, String message) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, title, message));
+	}
+
+	private void addMessageInfo(String title, String message) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, title, message));
+	}
 
 }

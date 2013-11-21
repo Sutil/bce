@@ -75,14 +75,17 @@ public class Obra implements Serializable {
 		this.disposicao = bean.getDisposicao();
 		this.exemplares = bean.getExemplares();
 		this.titulo = bean.getTitulo();
+		for(Exemplar e : exemplares){
+			e.setObra(this);
+		}
 	}
 	
 	public static Obra newInstance(ObraBean bean){
 		checkNotNull(bean);
-		checkArgument(bean.getAutores() != null && !bean.getAutores().isEmpty());
-		checkNotNull(bean.getCategoria());
-		checkNotNull(bean.getDisposicao());
-		checkArgument(!Strings.isNullOrEmpty(bean.getTitulo()));
+		checkArgument(bean.getAutores() != null && !bean.getAutores().isEmpty(), "informe os autores!");
+		checkNotNull(bean.getCategoria(), "Informe a categoria");
+		checkNotNull(bean.getDisposicao(), "Informe se a obra está disponível ou não para empréstimo");
+		checkArgument(!Strings.isNullOrEmpty(bean.getTitulo()), "Inform o título da Obra");
 		return new Obra(bean);
 	}
 

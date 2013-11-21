@@ -6,51 +6,66 @@
 	template="/WEB-INF/template/ui.xhtml">
 	<ui:define name="content">
 		<h:form id="form">
-			<p:messages />
+			<p:messages closable="true">
+				<p:effect type="clip" event="load">
+					<f:param name="mode" value="'show'" />
+				</p:effect>
+			</p:messages>
 
 			<p:fieldset legend="Cadastro de Obra">
-				<h:panelGrid columns="2">
+				<h:panelGrid columns="3">
 					<h:outputText value="Categoria:" />
-					<p:selectOneMenu value="#{obraBean.categoria}" required="true"
-						requiredMessage="Informe uma categoria">
+					<p:selectOneMenu id="categoria" value="#{obraBean.categoria}"
+						required="true" requiredMessage="Informe uma categoria">
 						<f:selectItems value="#{categorias}" var="cat"
 							itemLabel="#{cat.descricao}" itemValue="#{cat}" />
 					</p:selectOneMenu>
+					<p:message for="categoria" />
 
 
 					<h:outputText value="Titulo:" />
-					<p:inputText value="#{obraBean.titulo}" />
+					<p:inputText id="titulo" value="#{obraBean.titulo}" required="true"
+						requiredMessage="Inform o título" />
+					<p:message for="titulo" />
 
 					<h:outputText value="Autore(s)" />
-					<p:autoComplete value="#{obraBean.autores}" multiple="true"
-						completeMethod="#{obraController.completeAutores}"
+					<p:autoComplete id="autores" value="#{obraBean.autores}"
+						multiple="true" completeMethod="#{obraController.completeAutores}"
+						required="true" requiredMessage="Informe os autores desta obra."
 						converter="autorConverter" var="autor" itemValue="#{autor}"
 						itemLabel="#{autor.sobrenome.toUpperCase()}, #{autor.nome}" />
+					<p:message for="autores" />
 
 					<h:outputText value="Emprestimo:" />
-					<p:selectOneMenu value="#{obraBean.disposicao}" required="true"
-						requiredMessage="Informe a disposicao:">
+					<p:selectOneMenu id="disposicao" value="#{obraBean.disposicao}"
+						required="true" requiredMessage="Informe a disposicao:">
 						<f:selectItems value="#{disposicoes}" var="disp"
 							itemLabel="#{disp.descricao}" itemValue="#{disp}" />
 					</p:selectOneMenu>
-
-					<h:outputText value="Exemplares" />
-					<h:panelGrid columns="1">
-						<p:dataTable id="exemplares" value="#{exemplares}" var="ex"
-							emptyMessage="Não há exemplares para esta obra">
-							<p:column headerText="Código do exemplar">
-								<h:outputText value="#{obraBean.titulo} Código #{ex.identificador}" />
-							</p:column>
-							<p:column>
-								<p:commandButton icon="ui-icon-cancel" title="Remover exemplar com código #{ex.identificador}" />
-							</p:column>
-						</p:dataTable>
-						<p:commandButton value="Adicionar exemplar" action="adicionarExemplar" update="exemplares" />
-					</h:panelGrid>
-
-					<p:commandButton value="Salvar" action="save" update="@form" />
-					<p:commandButton value="Cancelar" action="cancelar" />
+					<p:message for="disposicao" />
 				</h:panelGrid>
+
+				<p:fieldset legend="Exemplares">
+					<p:commandButton value="Adicionar exemplar"
+						action="adicionarExemplar" update="exemplares" />
+					<p:dataTable id="exemplares" value="#{exemplares}" var="ex"
+						emptyMessage="Não há exemplares para esta obra">
+						<p:column headerText="Código do exemplar">
+							<h:outputText
+								value="#{obraBean.titulo} Código #{ex.identificador}" />
+						</p:column>
+						<p:column>
+							<p:commandButton icon="ui-icon-close"
+								title="Remover exemplar com código #{ex.identificador}" />
+						</p:column>
+					</p:dataTable>
+
+				</p:fieldset>
+
+
+				<p:commandButton value="Salvar" action="save" update="@form" />
+				<p:commandButton value="Cancelar" action="cancelar" immediate="true" />
+
 			</p:fieldset>
 
 

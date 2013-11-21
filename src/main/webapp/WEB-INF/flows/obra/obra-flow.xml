@@ -17,7 +17,9 @@
 		<transition on="novo" to="obraedit">
 			<evaluate expression="obraController.novo()" result="flowScope.obraBean" />
 		</transition>
-
+		<transition on="editar" to="obraedit" >
+			<evaluate expression="obraController.editarObra(obras.selectedRow)" result="flowScope.obraBean"  />
+		</transition>
 	</view-state>
 	
 	<view-state id="obraedit">
@@ -30,10 +32,12 @@
 			<evaluate expression="obraController.addExemplar(obraBean, exemplares)" result="viewScope.exemplares" result-type="dataModel" />
 		</transition>
 		<transition on="save" to="ok" >
-			<evaluate expression="obraController.save(obraBean)"/>
+			<evaluate expression="obraController.save(obraBean, exemplares)"/>
 		</transition>
+		<transition on="cancelar" to="cancel" />
 	</view-state>
 		
 
 	<end-state id="ok" commit="true" />
+	<end-state id="cancel"/>
 </flow>

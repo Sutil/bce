@@ -74,5 +74,9 @@ public class Exemplar implements Serializable {
 		return obra;
 	}
 	
+	public void setObra(Obra obra) {
+		this.obra = obra;
+	}
+	
 
 }
