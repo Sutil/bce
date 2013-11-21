@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/ui.xhtml">
+	<ui:define name="content">
+		<h:form id="form">
+			<p:messages />
+
+			<p:fieldset legend="Cadastro de Obra">
+				<h:panelGrid columns="2">
+					<h:outputText value="Categoria:" />
+					<p:selectOneMenu value="#{obraBean.categoria}" required="true"
+						requiredMessage="Informe uma categoria">
+						<f:selectItems value="#{categorias}" var="cat"
+							itemLabel="#{cat.descricao}" itemValue="#{cat}" />
+					</p:selectOneMenu>
+
+
+					<h:outputText value="Titulo:" />
+					<p:inputText value="#{obraBean.titulo}" />
+
+					<h:outputText value="Autore(s)" />
+					<p:autoComplete value="#{obraBean.autores}" multiple="true"
+						completeMethod="#{obraController.completeAutores}"
+						converter="autorConverter" var="autor" itemValue="#{autor}"
+						itemLabel="#{autor.sobrenome.toUpperCase()}, #{autor.nome}" />
+
+					<h:outputText value="Emprestimo:" />
+					<p:selectOneMenu value="#{obraBean.disposicao}" required="true"
+						requiredMessage="Informe a disposicao:">
+						<f:selectItems value="#{disposicoes}" var="disp"
+							itemLabel="#{disp.descricao}" itemValue="#{disp}" />
+					</p:selectOneMenu>
+
+					<h:outputText value="Exemplares" />
+					<h:panelGrid columns="1">
+						<p:dataTable id="exemplares" value="#{exemplares}" var="ex"
+							emptyMessage="Não há exemplares para esta obra">
+							<p:column headerText="Código do exemplar">
+								<h:outputText value="#{obraBean.titulo} Código #{ex.identificador}" />
+							</p:column>
+							<p:column>
+								<p:commandButton icon="ui-icon-cancel" title="Remover exemplar com código #{ex.identificador}" />
+							</p:column>
+						</p:dataTable>
+						<p:commandButton value="Adicionar exemplar" action="adicionarExemplar" update="exemplares" />
+					</h:panelGrid>
+
+					<p:commandButton value="Salvar" action="save" update="@form" />
+					<p:commandButton value="Cancelar" action="cancelar" />
+				</h:panelGrid>
+			</p:fieldset>
+
+
+
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

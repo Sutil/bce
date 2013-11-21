@@ -1,0 +1,34 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/ui.xhtml">
+
+
+	<ui:define name="content">
+		<h:form id="form">
+
+			<h:panelGrid columns="1">
+
+				<h:outputText value="Nome do perfil:" />
+				<p:message for="nome" />
+				<p:inputText id="nome" value="#{perfilBean.nome}" required="true" requiredMessage="Informe o nome do perfil" />
+
+				<h:outputText value="Permissões do perfil:" />
+				<p:message for="pickerPermissoes" />
+				<p:pickList id="pickerPermissoes" converter="permissaoConverter"
+					value="#{perfilBean.permissoesDualList}" var="per" required="true" requiredMessage="Vincule ao menos uma permissão"
+					itemValue="#{per}" itemLabel="#{per.codigo}">
+					<f:facet name="sourceCaption">Disponíveis</f:facet>
+					<f:facet name="targetCaption">Vinculados</f:facet>
+					<p:ajax event="transfer" update="@this" />  
+				</p:pickList>
+				<p:commandButton value="Cancelar" action="cancelar" immediate="true" />
+				<p:commandButton value="Salvar" action="salvar" update="@form" />
+			</h:panelGrid>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+

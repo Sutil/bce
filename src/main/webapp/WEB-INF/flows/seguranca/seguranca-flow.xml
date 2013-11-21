@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+        parent="main-flow">
+
+	<persistence-context />
+
+	<view-state id="menuseguranca">
+	    <transition on="usuarios" to="userList" />
+	    <transition on="perfis" to="perfillist" />
+	</view-state>
+	
+	
+	
+	<view-state id="perfillist">
+		<on-render>
+			<evaluate expression="segurancaController.getPerfis()" result="viewScope.perfis" result-type="dataModel"/>
+		</on-render>
+		<transition on="novoPerfil" to="perfiledit">
+			<evaluate expression="segurancaController.novoPerfil()" result="flowScope.perfilBean" />
+		</transition>
+		<transition on="editar" to="perfiledit" >
+			<evaluate expression="segurancaController.edit(perfis.selectedRow)" result="flowScope.perfilBean" />
+		</transition>
+		<transition on="deletar">
+			<evaluate expression="segurancaController.deletePerfil(perfis.selectedRow)"/>
+		</transition>
+		<transition on="voltar" to="ok" />
+	</view-state>
+	
+	
+	<view-state id="perfiledit">
+		<transition on="cancelar" to="cancel" />
+		<transition on="salvar" to="perfillist">
+			<evaluate expression="segurancaController.salvarPerfil(perfilBean)"  />
+		</transition>
+	</view-state>
+	
+	
+	<view-state id="userList">
+		<on-render>
+			<evaluate expression="segurancaController.getUsuarios()" result="viewScope.usuarios" result-type="dataModel" />
+		</on-render>
+		<transition on="novo" to="useredit" >
+			<evaluate expression="segurancaController.novoUsuario()" result="flowScope.userBean" />
+		</transition>
+		<transition on="editar" to="useredit" >
+			<evaluate expression="segurancaController.editarUsuario(usuarios.selectedRow)" result="flowScope.userBean" />
+		</transition>
+		<transition on="deletar">
+			<evaluate expression="segurancaController.deletarUsuario(usuarios.selectedRow)" />
+		</transition>
+		<transition on="voltar" to="ok" />
+	</view-state>
+	
+	
+	<view-state id="useredit">
+		<on-entry>
+			<evaluate expression="segurancaController.getPerfis()" result="viewScope.perfis" />
+		</on-entry>
+		<transition on="salvar" to="userList" >
+			<evaluate expression="segurancaController.salvarUsuario(userBean)" />
+		</transition>
+		<transition on="cancelar" to="userList" />
+	</view-state>
+	
+	
+	<end-state id="ok" commit="true" />
+	<end-state id="cancel"/>
+</flow>

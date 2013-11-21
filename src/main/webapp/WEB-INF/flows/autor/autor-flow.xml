@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+        parent="main-flow" >
+
+	<persistence-context />
+
+	<view-state id="autorlist">
+		<on-render>
+			<evaluate expression="persistenceContext.clear()"></evaluate>
+			<evaluate expression="autorController.listar()" result="viewScope.autores" result-type="dataModel" />
+		</on-render>
+		<transition on="novo" to="autoredit">
+			<evaluate expression="autorController.novo()" result="flowScope.autorBean" />
+		</transition>
+		<transition on="editar" to="autoredit" >
+			<evaluate expression="autorController.editar(autores.selectedRow)" result="flowScope.autorBean"></evaluate>
+		</transition>
+		<transition on="delete">
+			<evaluate expression="autorController.delete(autores.selectedRow)" />
+		</transition>
+		
+
+	</view-state>
+	
+	<view-state id="autoredit">
+		<transition on="save" to="ok" >
+			<evaluate expression="autorController.save(autorBean)"/>
+		</transition>
+	</view-state>
+
+	<end-state id="ok" commit="true" />
+</flow>

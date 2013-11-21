@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        template="blankLogin.xhtml">
+
+        <ui:define name="body">
+                <p:growl globalOnly="true" autoUpdate="true" />
+                <div id="app" class="page_login">
+                        <h1 id="logo">
+                                <img src="" title="School" />
+                        </h1>
+
+                        <script type="text/javascript">
+                                $(function() {
+                                        $('input.field_login').focus()
+                                })
+                        </script>
+
+                        <div id="main">
+                                <ui:insert name="login" />
+                        </div>
+                </div>
+        </ui:define>
+</ui:composition>

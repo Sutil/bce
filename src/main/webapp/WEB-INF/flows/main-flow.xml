@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow 
+	  http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+	abstract="true">
+
+	<end-state id="Home"
+		view="externalRedirect:contextRelative:/spring/home" />
+	<end-state id="Obras"
+		view="externalRedirect:contextRelative:/spring/obra" />
+	<end-state id="Seguranca" 
+	 	view="externalRedirect:contextRelative:/spring/seguranca" />
+
+	<global-transitions>
+		<transition on="home" to="Home" />
+		<transition on="obras" to="Obras" />
+		<transition on="seguranca" to="Seguranca" />
+	</global-transitions>
+
+
+</flow>

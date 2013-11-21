@@ -1,0 +1,95 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800);
+
+body {
+	background: #FFFFFF url("#{resource['images:back.jpg']}") no-repeat
+                center center fixed;
+	margin: 0;
+	padding: 0;
+	min-width: 600px;
+	min-width: 600px;
+	font-family: "Open Sans", Arial, Verdana;
+	font-size: 14px;
+	text-rendering: optimizelegibility;
+}
+
+#app.page_login {
+	height: 100%;
+	width: 100%;
+	display: table;
+}
+
+.page_login #logo {
+	display: none;
+}
+
+.page_login td {
+	margin: 0;
+	font-weight: lighter;
+}
+
+.page_login #formlogin {
+	padding: 25px 37px;
+	position: absolute;
+	background: rgba(0, 0, 0, 0.2);
+	color: #FFF;
+	right: 160px;
+	top: 30%;
+	width: 400px;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box; /* Firefox, other Gecko */
+	box-sizing: border-box; /* Opera/IE 8+ */
+}
+
+.page_login #formlogin .steTitulo {
+	font-size: 20px;
+	font-weight: 400;
+	text-transform: uppercase !important;
+	color: #ccc;
+}
+
+.page_login #formlogin .systemTitulo {
+	font-size: 20px;
+	font-weight: 700;
+	letter-spacing: 0.2em;
+	color: #fff;
+}
+
+.page_login #formlogin .btn_entrar {
+	border: 0 solid;
+	margin-top: 10px;
+	padding: 5px 25px;
+	font-size: 15px !important;
+	background: #9ACD32;
+	color: #FFF;
+}
+
+.page_login #formlogin .field_login {
+	width: 100%;
+	border: 0 solid;
+	padding: 8px;
+	font-size: 15px !important;
+	font-family: "Open Sans", Arial, Verdana;
+	font-weight: 600;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box; /* Firefox, other Gecko */
+	box-sizing: border-box; /* Opera/IE 8+ */
+}
+
+.page_login #formlogin .field_password {
+	width: 100%;
+	border: 0 solid;
+	padding: 8px;
+	font-size: 15px !important;
+	font-family: "Open Sans", Arial, Verdana;
+	font-weight: 600;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box; /* Firefox, other Gecko */
+	box-sizing: border-box; /* Opera/IE 8+ */
+}
+
+.page_login #formlogin .field_login:focus,.page_login #formlogin .field_password:focus
+	{
+	outline: solid 1px #787878;
+	-webkit-box-shadow: inset 0px 2px 3px 2px rgba(0, 0, 0, 0.4);
+	box-shadow: inset 0px 2px 3px 2px rgba(0, 0, 0, 0.4);
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<properties>
+	<property id="images">
+		<path>/home/sutil/Documentos/projetos/pdr/target/mvd/resources/images/book</path>
+	</property>
+</properties>

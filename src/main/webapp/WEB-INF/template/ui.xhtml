@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/blank.xhtml">
+	<ui:define name="body">
+		<div id="menu">
+			<h:form id="formMenu">
+				<div id="header">
+					<div class="clearfix">
+						<div class="logo"></div>
+
+						<ul class="navigation">
+							<li><h:commandLink action="home"><h:outputText value="Home" /> </h:commandLink> </li>
+							<li><h:commandLink action="obras"><h:outputText value="Obras" /> </h:commandLink> </li>
+							
+						</ul>
+
+					</div>
+
+				</div>
+			</h:form>
+			
+		</div>
+		<div id="main" class="admin">
+			<ui:insert name="content" />
+		</div>
+	</ui:define>
+</ui:composition>

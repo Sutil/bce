@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="loginTemplate.xhtml">
+
+	<ui:define name="login">
+		<h:form id="formlogin" prependId="false" >
+
+			<h:panelGrid columns="1">
+				<h:outputText value="Sutil" styleClass="systemTitulo">
+					<h:outputText value="Exemplo " styleClass="steTitulo" />
+				</h:outputText>
+
+				<h:outputText
+					value="Para acessar, entre com Login e Senha." />
+				<p:message for="j_username" />
+				<p:inputText id="j_username" size="60" required="true"
+					requiredMessage="É necessário informar o usuário."
+					styleClass="field_login" />
+				<p:watermark for="j_username" value="Login" />
+
+				<p:message for="j_password" />
+				<p:password id="j_password" size="60" required="true"
+					styleClass="field_password"
+					requiredMessage="É necessário informar a senha." />
+				<p:watermark for="j_password" value="Senha" />
+
+				<p:commandButton value="Entrar" 
+				action="#{loginController.login()}"
+				ajax="false" styleClass="btn_entrar" />
+
+			</h:panelGrid>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

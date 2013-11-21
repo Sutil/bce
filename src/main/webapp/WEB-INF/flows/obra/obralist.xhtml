@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/ui.xhtml">
+	<ui:define name="content">
+		<h:form id="form">
+
+			<h:panelGrid columns="2">
+				<p:commandButton id="btPesquisa" value="Pesquisar" action="pesquisar"  update="@form" />
+				<p:commandButton id="btNovo" value="Cadastrar Nova Obra" action="novo" />
+			</h:panelGrid>
+			<p:dataTable emptyMessage="Nenhuma obra cadastrada" value="#{obras}" var="obra" >
+				<f:facet name="header">Obras</f:facet>
+				<p:column headerText="Título">
+					<h:outputText value="#{obra.titulo}" />
+				</p:column>
+				<p:column headerText="Categoria">
+					<h:outputText value="#{obra.categoria.descricao}" />
+				</p:column>
+				<p:column headerText="Emprestimo">
+					<h:outputText value="#{obra.disposicao.descricao}" />
+				</p:column>
+				<p:column headerText="Autores">
+					<p:dataList value="#{obra.autores}" var="autor" itemType="square" >
+						#{autor.sobrenome.toUpperCase()}, #{autor.nome}
+					</p:dataList>
+				</p:column>
+				<p:column headerText="Nº de exemplares">
+					<h:outputText value="#{obra.exemplares.size()}" />
+				</p:column>
+				
+				<p:column headerText="Opções">
+					<p:commandButton value="Editar" icon="ui-icon-pencil" />
+					<p:commandButton value="Excluir" icon="ui-icon-trash" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		
+		
+	</ui:define>
+</ui:composition>
+

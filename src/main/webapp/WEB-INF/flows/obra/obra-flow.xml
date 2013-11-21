@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+        parent="main-flow">
+
+	<persistence-context />
+
+	<view-state id="obralist">
+		<on-render>
+			<evaluate expression="obraController.pesquisar()" result="viewScope.obras" result-type="dataModel" />
+		</on-render>
+		<transition on="pesquisar">
+			<evaluate expression="persistenceContext.clear()" />
+		</transition>
+		<transition on="novo" to="obraedit">
+			<evaluate expression="obraController.novo()" result="flowScope.obraBean" />
+		</transition>
+
+	</view-state>
+	
+	<view-state id="obraedit">
+		<on-entry>
+			<evaluate expression="obraController.getCategorias()" result="viewScope.categorias" />
+			<evaluate expression="obraController.getDisposicoes()" result="viewScope.disposicoes" />
+			<evaluate expression="obraBean.getExemplares()" result="viewScope.exemplares" result-type="dataModel" />
+		</on-entry>
+		<transition on="adicionarExemplar" >
+			<evaluate expression="obraController.addExemplar(obraBean, exemplares)" result="viewScope.exemplares" result-type="dataModel" />
+		</transition>
+		<transition on="save" to="ok" >
+			<evaluate expression="obraController.save(obraBean)"/>
+		</transition>
+	</view-state>
+		
+
+	<end-state id="ok" commit="true" />
+</flow>

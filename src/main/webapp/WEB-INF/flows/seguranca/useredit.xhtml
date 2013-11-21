@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/ui.xhtml">
+	
+
+	
+	<ui:define name="content">
+		<h:form id="form">
+			<p:panel header="Usuário" >
+			<h:panelGrid  columns="1">
+				Login:
+				<p:message for="login" ></p:message>
+				<p:inputText id="login" value="#{userBean.login}" required="true" requiredMessage="Informe o login"  />
+				Perfil:
+				<p:message for="perfil" />
+				<p:selectOneMenu id="perfil" value="#{userBean.perfil}" required="true" 
+								requiredMessage="Escolha um perfil" 
+								converter="perfilUsuarioConverter" >
+					<f:selectItem itemValue="#{null}" itemLabel="Escolha um perfil" />
+					<f:selectItems value="#{perfis}" var="perfil" itemLabel="#{perfil.nome}" itemValue="#{perfil}" />
+				</p:selectOneMenu>
+				
+				<h:panelGrid columns="2" >
+					<p:commandButton value="Salvar" action="salvar" update="@form" />
+					<p:commandButton value="Cancelar" action="cancelar" immediate="true" />
+				</h:panelGrid>
+				
+			</h:panelGrid>
+			</p:panel>
+		</h:form>
+		
+	</ui:define>
+</ui:composition>
+

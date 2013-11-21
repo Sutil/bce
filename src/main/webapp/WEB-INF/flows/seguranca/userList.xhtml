@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/ui.xhtml">
+	
+
+	
+	<ui:define name="content">
+		<h:form id="form">
+			<p:commandButton value="Novo Usuario" action="novo" />
+			<p:commandButton value="Voltar" action="voltar" />
+			<p:dataTable emptyMessage="Sem usuários cadastrados." value="#{usuarios}" var="user"  >
+				<p:column headerText="Login">
+					#{user.login}
+				</p:column>
+				<p:column headerText="Perfil">
+					#{user.perfil.nome}
+				</p:column>
+				<p:column headerText="Cota de Empréstimo" ></p:column>
+				<p:column headerText="Opções" >
+					<p:commandButton value="Editar" action="editar" />
+					<p:commandButton value="Excluir" action="deletar" update="@form" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		
+	</ui:define>
+</ui:composition>
+
