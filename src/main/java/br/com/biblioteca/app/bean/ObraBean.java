@@ -5,11 +5,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.io.Serializable;
 import java.util.List;
 
-import br.com.biblioteca.app.obra.Autor;
-import br.com.biblioteca.app.obra.Categoria;
-import br.com.biblioteca.app.obra.DisposicaoParaEmprestimo;
-import br.com.biblioteca.app.obra.Exemplar;
-import br.com.biblioteca.app.obra.Obra;
+import br.com.biblioteca.app.model.Autor;
+import br.com.biblioteca.app.model.Categoria;
+import br.com.biblioteca.app.model.DisposicaoParaEmprestimo;
+import br.com.biblioteca.app.model.Exemplar;
+import br.com.biblioteca.app.model.Obra;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;

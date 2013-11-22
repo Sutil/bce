@@ -1,4 +1,4 @@
-package br.com.biblioteca.app.obra;
+package br.com.biblioteca.app.model;
 
 import java.util.Map;
 

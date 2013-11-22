@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import br.com.biblioteca.app.model.Categoria;
+
 public class CategoriaTest {
 
 	@Test

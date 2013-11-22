@@ -11,7 +11,7 @@
 				<p:commandButton id="btPesquisa" value="Pesquisar" action="pesquisar"  update="@form" />
 				<p:commandButton id="btNovo" value="Cadastrar Nova Obra" action="novo" />
 			</h:panelGrid>
-			<p:dataTable emptyMessage="Nenhuma obra cadastrada" value="#{obras}" var="obra" >
+			<p:dataTable id="obras" emptyMessage="Nenhuma obra cadastrada" value="#{obras}" var="obra" >
 				<f:facet name="header">Obras</f:facet>
 				<p:column headerText="Título">
 					<h:outputText value="#{obra.titulo}" />
@@ -33,7 +33,7 @@
 				
 				<p:column headerText="Opções">
 					<p:commandButton value="Editar" icon="ui-icon-pencil" action="editar" />
-					<p:commandButton value="Excluir" icon="ui-icon-trash" />
+					<p:commandButton value="Excluir" icon="ui-icon-trash" action="deletar" update="obras" />
 				</p:column>
 			</p:dataTable>
 		</h:form>

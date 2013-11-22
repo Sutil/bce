@@ -7,6 +7,6 @@ package br.com.biblioteca.app.userType;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
-import br.com.biblioteca.app.obra.Categoria;
-import br.com.biblioteca.app.obra.DisposicaoParaEmprestimo;
+import br.com.biblioteca.app.model.Categoria;
+import br.com.biblioteca.app.model.DisposicaoParaEmprestimo;
 

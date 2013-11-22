@@ -14,11 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.biblioteca.app.bean.ObraBean;
-import br.com.biblioteca.app.obra.Autor;
-import br.com.biblioteca.app.obra.Categoria;
-import br.com.biblioteca.app.obra.DisposicaoParaEmprestimo;
-import br.com.biblioteca.app.obra.Exemplar;
-import br.com.biblioteca.app.obra.Obra;
+import br.com.biblioteca.app.model.Autor;
+import br.com.biblioteca.app.model.Categoria;
+import br.com.biblioteca.app.model.DisposicaoParaEmprestimo;
+import br.com.biblioteca.app.model.Exemplar;
+import br.com.biblioteca.app.model.Obra;
 import br.com.biblioteca.app.obra.QAutor;
 import br.com.biblioteca.app.obra.QExemplar;
 import br.com.biblioteca.app.repository.AutorRepository;
@@ -70,7 +70,7 @@ public class ObraController {
 		return obraRepository.findAll();
 	}
 
-	public List<Exemplar> addExemplar(ObraBean bean, DataModel<Exemplar> model) {
+	public List<Exemplar> addExemplar(DataModel<Exemplar> model) {
 		Iterator<Exemplar> iterator = model.iterator();
 		List<Exemplar> exemplares = Lists.newArrayList();
 		while (iterator.hasNext()) {
@@ -122,6 +122,16 @@ public class ObraController {
 		catch(Exception e){
 			addMessageError("Erro", e.getMessage());
 			return new ObraBean();
+		}
+	}
+	
+	public void deletarObra(Obra obra){
+		try{
+			obraRepository.delete(obra);
+			addMessageInfo("Obra deletada", "");
+		}
+		catch(Exception e){
+			addMessageError("Erro ao deletar obra", e.getMessage());
 		}
 	}
 

@@ -8,21 +8,37 @@
 
 	<ui:define name="content">
 		<h:form id="form">
-
+			<p:messages />
 			<h:panelGrid columns="1">
 
 				<h:outputText value="Nome do perfil:" />
 				<p:message for="nome" />
-				<p:inputText id="nome" value="#{perfilBean.nome}" required="true" requiredMessage="Informe o nome do perfil" />
+				<p:inputText id="nome" value="#{perfilBean.nome}" required="true"
+					requiredMessage="Informe o nome do perfil" />
+
+				<h:outputText
+					value="Cota para Empréstimo (Quantidade de exemplares)" />
+				<p:spinner value="#{perfilBean.cotaEmprestimo}" min="0" max="100"
+					validatorMessage="Valor inválido para a cota de empréstimo">
+					<f:validateDoubleRange minimum="0" maximum="100" />
+				</p:spinner>
+
+				<h:outputText value="Duração máximo permitida para empréstimo" />
+				<p:spinner value="#{perfilBean.duracaoDoEmprestimo}" min="0"
+					max="100"
+					validatorMessage="Valor inválido para a duração de empréstimo">
+					<f:validateDoubleRange minimum="0" maximum="100" />
+				</p:spinner>
 
 				<h:outputText value="Permissões do perfil:" />
 				<p:message for="pickerPermissoes" />
 				<p:pickList id="pickerPermissoes" converter="permissaoConverter"
-					value="#{perfilBean.permissoesDualList}" var="per" required="true" requiredMessage="Vincule ao menos uma permissão"
-					itemValue="#{per}" itemLabel="#{per.codigo}">
+					value="#{perfilBean.permissoesDualList}" var="per" required="true"
+					requiredMessage="Vincule ao menos uma permissão" itemValue="#{per}"
+					itemLabel="#{per.codigo}">
 					<f:facet name="sourceCaption">Disponíveis</f:facet>
 					<f:facet name="targetCaption">Vinculados</f:facet>
-					<p:ajax event="transfer" update="@this" />  
+					<p:ajax event="transfer" update="@this" />
 				</p:pickList>
 				<p:commandButton value="Cancelar" action="cancelar" immediate="true" />
 				<p:commandButton value="Salvar" action="salvar" update="@form" />

@@ -7,7 +7,7 @@ import java.sql.Types;
 
 import org.hibernate.HibernateException;
 
-import br.com.biblioteca.app.obra.DisposicaoParaEmprestimo;
+import br.com.biblioteca.app.model.DisposicaoParaEmprestimo;
 
 
 public class DisposicaoParaEmprestimoUserType extends ImmutableUserType{

@@ -47,7 +47,7 @@
 
 				<p:fieldset legend="Exemplares">
 					<p:commandButton value="Adicionar exemplar"
-						action="adicionarExemplar" update="exemplares" />
+						action="adicionarExemplar" update="exemplares" immediate="true" />
 					<p:dataTable id="exemplares" value="#{exemplares}" var="ex"
 						emptyMessage="Não há exemplares para esta obra">
 						<p:column headerText="Código do exemplar">

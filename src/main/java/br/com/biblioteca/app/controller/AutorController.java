@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.biblioteca.app.bean.AutorBean;
-import br.com.biblioteca.app.obra.Autor;
+import br.com.biblioteca.app.model.Autor;
 import br.com.biblioteca.app.repository.AutorRepository;
 
 @Controller

@@ -4,7 +4,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.io.Serializable;
 
-import br.com.biblioteca.app.obra.Autor;
+import br.com.biblioteca.app.model.Autor;
 
 public class AutorBean implements Serializable {
 	

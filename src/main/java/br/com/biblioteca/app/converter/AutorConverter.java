@@ -8,7 +8,7 @@ import javax.faces.convert.FacesConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 
-import br.com.biblioteca.app.obra.Autor;
+import br.com.biblioteca.app.model.Autor;
 import br.com.biblioteca.app.repository.AutorRepository;
 
 @Configurable

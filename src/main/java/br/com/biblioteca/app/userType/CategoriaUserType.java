@@ -7,7 +7,7 @@ import java.sql.Types;
 
 import org.hibernate.HibernateException;
 
-import br.com.biblioteca.app.obra.Categoria;
+import br.com.biblioteca.app.model.Categoria;
 
 
 public class CategoriaUserType extends ImmutableUserType{
