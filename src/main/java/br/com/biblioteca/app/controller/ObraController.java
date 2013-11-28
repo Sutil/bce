@@ -9,7 +9,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.faces.model.OneSelectionTrackingListDataModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,8 +18,7 @@ import br.com.biblioteca.app.model.Categoria;
 import br.com.biblioteca.app.model.DisposicaoParaEmprestimo;
 import br.com.biblioteca.app.model.Exemplar;
 import br.com.biblioteca.app.model.Obra;
-import br.com.biblioteca.app.obra.QAutor;
-import br.com.biblioteca.app.obra.QExemplar;
+import br.com.biblioteca.app.model.QAutor;
 import br.com.biblioteca.app.repository.AutorRepository;
 import br.com.biblioteca.app.repository.ExemplarRepository;
 import br.com.biblioteca.app.repository.ObraRepository;

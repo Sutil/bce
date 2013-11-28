@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/ui.xhtml">
+	<ui:define name="content">
+
+		<h:form>
+			<p:panel header="Gerando devolução">
+				<h:panelGrid columns="1">
+					Usuário:
+					<h:outputText value="#{devolucaoBean.emprestimo.usuario.login}" />
+					
+					Exemplar:
+					<h:outputText
+						value="#{devolucaoBean.emprestimo.exemplar.obra.titulo} - #{devolucaoBean.emprestimo.exemplar.identificador}" />
+				</h:panelGrid>
+				<p:commandButton value="Devolver" action="#{devolucaoBean.devolver()}" update=":formdg"
+					onclick="dgConfirma.show();"></p:commandButton>
+				<p:commandButton value="Cancelar" action="cancelar"></p:commandButton>
+			</p:panel>
+
+		</h:form>
+
+		<p:dialog header="Confirmar" widgetVar="dgConfirma" modal="true">
+			<h:form id="formdg"> 
+				<h:panelGrid columns="1">
+				<h:outputText value="Esta devolução está com #{devolucaoBean.emprestimo.atraso()} dias de atraso"
+								rendered="#{devolucaoBean.emprestimo.atrasado}"></h:outputText>
+				<h:outputText value="gerando uma multa de: R$ #{devolucaoBean.multa.valor}"
+								rendered="#{devolucaoBean.emprestimo.atrasado}"></h:outputText>
+					<h:outputText value="Deseja confirmar a devolução?"></h:outputText>
+				</h:panelGrid>
+				<p:commandButton value="Sim" onclick="dgConfirma.hide();" action="devolver"></p:commandButton>
+				<p:commandButton value="Não" onclick="dgConfirma.hide();"></p:commandButton>
+			</h:form>
+
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>
+

@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/ui.xhtml">
+	<ui:define name="content">
+
+		<h:form>
+			<p:messages id="msgs" />
+			<p:remoteCommand name="validar" update="btEmprestar, msgs" />
+
+			Usuário:
+			<h:panelGrid columns="1">
+				<p:message for="user" />
+				<p:autoComplete id="user" value="#{bean.usuario}" immediate="true"
+					converter="usuarioConverter" 
+					completeMethod="#{emprestimoController.completeUsuario}" var="user"
+					itemValue="#{user}" itemLabel="#{user.login}"  >
+					<p:ajax event="itemSelect" oncomplete="validar();" />
+					</p:autoComplete>
+
+			Exemplar (Serão mostrados apenas exemplares que não disponíveis para emprestimo e não estão emprestados):
+				<p:message for="exemplar" />
+				<p:autoComplete id="exemplar" value="#{bean.exemplar}" immediate="true"
+					converter="exemplarConverter"  
+					completeMethod="#{emprestimoController.completeExemplar}" var="ex"
+					itemValue="#{ex}"
+					itemLabel="#{ex.obra.titulo} #{ex.identificador}" >
+					<p:ajax event="itemSelect" oncomplete="validar();" />
+				</p:autoComplete>
+			
+			<h:panelGrid columns="2" >
+				<p:commandButton id="btEmprestar" value="Emprestar" action="emprestar"  disabled="#{not bean.podeGerarEmprestimo()}"
+					 />
+				<p:commandButton value="Cancelar" immediate="true" action="cancelar" />
+			</h:panelGrid>
+
+			</h:panelGrid>
+
+		</h:form>
+		
+		
+
+
+
+	</ui:define>
+</ui:composition>
+

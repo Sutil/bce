@@ -7,6 +7,12 @@
 
 
 	<view-state id="home">
+		<on-entry>
+			<evaluate expression="homeController.newFiltro()" result="viewScope.filtro"/>
+		</on-entry>
+		<transition on="pesquisar" >
+			<evaluate expression="homeController.pesquisar(filtro)" result="viewScope.exemplares" result-type="dataModel" />
+		</transition>
 		
 	</view-state>
 

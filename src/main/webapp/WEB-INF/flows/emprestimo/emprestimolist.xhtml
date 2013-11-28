@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/ui.xhtml">
+	<ui:define name="content">
+
+
+		<p:layout fullPage="false" style="height: 1200px;" >
+			<p:layoutUnit position="west" size="200" collapsible="true" resizable="true" 
+						  header="Filtro de pesquisa"	>
+						  <h:form id="formFiltro" >
+						  	<h:panelGrid columns="1" >
+						  		
+						  		
+						  		<p:commandButton value="Pesquisar" action="pesquisar" update=":form" />
+						  	
+						  	</h:panelGrid>
+						  	
+						  
+						  </h:form>
+
+			</p:layoutUnit>
+			<p:layoutUnit position="center">
+				<h:form id="form">
+					
+					<p:commandButton value="Criar novo empréstimo" action="novo" />
+
+					<p:dataTable emptyMessage="Nenhum empréstimo encontrado." value="#{emprestimos}" var="e"
+					   rowStyleClass="#{e.devolvido ? 'verde' : e.atrasado ? 'laranja' : ''}" >
+						<p:column headerText="Retirada"  >
+							<h:outputText value="#{e.retirada}" />
+						</p:column>
+						<p:column headerText="Prazo">#{e.previsaoDeDevolucao}</p:column>
+						<p:column headerText="Usuario">#{e.usuario.login}</p:column>
+						<p:column headerText="Obra">#{e.exemplar.obra.titulo} - #{e.exemplar.identificador}</p:column>
+						<p:column headerText="Devolução"></p:column>
+						<p:column headerText="Opções">
+							<p:commandButton value="Devolver" action="devolver" icon="ui-icon-arrowreturnthick-1-w" rendered="#{not e.devolvido}" />
+						</p:column>
+
+					</p:dataTable>
+				</h:form>
+
+
+			</p:layoutUnit>
+
+		</p:layout>
+
+
+
+	</ui:define>
+</ui:composition>
+

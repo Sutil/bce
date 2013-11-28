@@ -18,5 +18,13 @@
 		<converter-id>perfilUsuarioConverter</converter-id>
 		<converter-class>br.com.biblioteca.app.converter.PerfilUsuarioConverter</converter-class>
 	</converter>
+	<converter>
+		<converter-id>usuarioConverter</converter-id>
+		<converter-class>br.com.biblioteca.app.converter.UsuarioConverter</converter-class>
+	</converter>
+	<converter>
+		<converter-id>exemplarConverter</converter-id>
+		<converter-class>br.com.biblioteca.app.converter.ExemplarConverter</converter-class>
+	</converter>
 	
 </faces-config>

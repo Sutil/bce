@@ -4,17 +4,27 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/template/ui.xhtml">
+	
 	<ui:define name="content">
+		<p:messages autoUpdate="true" showSummary="true" showDetail="true" />
 		<h:form id="form">
-
-			<div class="menu">
-
-
-				<h:commandLink action="seguranca">
-					<h:outputText value="Segurança" />
-					<i class="fa fa-key fa-4x" />
-				</h:commandLink>
-			</div>
+			
+			<p:panel header="Pesquisa no acervo" >
+				<p:inputText id="busca" value="#{filtro.busca}" size="80" ></p:inputText>
+				<p:watermark for="busca" value="Digite parte do nome da obra"></p:watermark>
+				<p:commandButton value="Pesquisar" action="pesquisar" update="@form" />
+			</p:panel>
+			
+			<p:dataTable emptyMessage="Não foram encontrados exemplares na sua pesquisa"
+						value="#{exemplares}" var="e" rowStyleClass="#{e.estaEmprestado() ? 'laranja' : 'verde' }" >
+				<f:facet name="header">Exemplares encontrados</f:facet>
+				<p:column headerText="Código" >#{e.identificador}</p:column>
+				<p:column headerText="Obra" >#{e.obra.titulo}</p:column>
+				<p:column headerText="Opções" >
+					<p:commandButton value="Reservar" rendered="#{e.estaEmprestado()}" />
+				</p:column>
+			</p:dataTable>
+			
 		</h:form>
 	</ui:define>
 </ui:composition>

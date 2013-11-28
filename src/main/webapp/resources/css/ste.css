@@ -10,8 +10,8 @@ body {
 }
 
 #header {
-	background: #CC4444 url(../images/bg-header.jpg) repeat-x left bottom;
-	padding: 25px 100px 100px;
+	background: #CC4444 url("#{resource['favicon.png']}") repeat-x left bottom;
+	padding: 0px 100px 65px;
 }
 /** logo **/
 .logo {
@@ -154,52 +154,62 @@ body {
 
 
 
-
 /* menu */
-.menu li {
-	margin:0;
-	padding: 0;
-	display: inline-block; 
-}
-/*
-header nav#navmain li:first-child { border-left: 1px solid rgba(255, 255, 255, 0.2); }
-header nav#navmain li:last-child { border-right: 1px solid rgba(0, 0, 0, 0.1); }
-*/
-.menu li a {
-	display: block;
 
-	width: 115px;
-	height: 92px;
+.bts {
 	text-align: center;
-	overflow: hidden;
-	padding-top:15px;
-	font-weight: 400;
-	border-left: 1px solid #4189D3;
-	border-right: 1px solid #4189D3;
-	margin-left:-1px;
+}
 
-	opacity: 0.5;
+.bts ul {
+	list-style: none;
+	padding: 0;
+	margin-bottom: 20px;
+}
 
-	/*
-	border-left: 1px solid rgba(0, 0, 0, 0.1);
-	border-right: 1px solid rgba(255, 255, 255, 0.2);
-	*/
+.bts li {
+	margin: 0 15px 15px;
+	padding: 0;
+	display: inline-block;
+	text-align: center;
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
-	box-sizing: border-box;         /* Opera/IE 8+ */
+	-moz-box-sizing: border-box; /* Firefox, other Gecko */
+	box-sizing: border-box; /* Opera/IE 8+ */
+	
 }
 
-.menu li:nth-child(even) a {
-	background: #2075CC;
+.bts ul li a {
+	color: #444;
+	width: 150px;
+	height: 150px;
+	padding: 30px 30px 30px;
+	display: table-cell;
+	border: 1px solid #ddd;
+	text-shadow: 1px 1px 1px #ffffff;
+	filter: dropshadow(color = #ffffff, offx = 1, offy = 1);
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box; /* Firefox, other Gecko */
+	box-sizing: border-box; /* Opera/IE 8+ */
+	text-decoration: none;
 }
 
-
-.menu li a i {
+.bts li a i {
 	display: inline-block;
 	width: 100%;
 	text-align: center;
 	margin-bottom: 10px;
+	opacity: 0.8;
+	color: #EEA500;
 }
 
-header .menu li a:hover {  opacity: 1; }
+.bts ul li a:hover {
+	color: #777;
+}
+
+.laranja{
+	background:  #FF8888;
+}
+
+.verde{
+	background: #00FF00;
+}
 

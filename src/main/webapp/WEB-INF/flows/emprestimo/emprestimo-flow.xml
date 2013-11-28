@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+        parent="main-flow">
+
+
+	<view-state id="emprestimolist">
+		<transition on="novo" to="emprestimoedit" >
+			<evaluate expression="emprestimoController.novo()" result="flowScope.bean" />
+		</transition>
+		<transition on="pesquisar">
+			<evaluate expression="emprestimoController.pesquisar()" result="viewScope.emprestimos" result-type="dataModel"  />
+		</transition>
+		<transition on="devolver" to="devolucao" >
+			<evaluate expression="emprestimoController.devolver(emprestimos.selectedRow)" result="flowScope.devolucaoBean" />
+		</transition>
+	</view-state>
+	
+	
+	<view-state id="emprestimoedit">
+		<transition on="cancelar" to="emprestimolist" />
+		<transition on="emprestar" to="emprestimolist" >
+			<evaluate expression="emprestimoController.gerarEmprestimo(bean)" />
+		</transition>
+	</view-state>
+	
+	<view-state id="devolucao">
+		<transition on="devolver" to="emprestimolist" >
+			<evaluate expression="emprestimoController.devolver(devolucaoBean)" />
+		</transition>
+	</view-state>
+
+	
+</flow>

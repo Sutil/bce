@@ -5,17 +5,19 @@
 	  http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
 	abstract="true">
 
-	<end-state id="Home"
-		view="externalRedirect:contextRelative:/spring/home" />
-	<end-state id="Obras"
-		view="externalRedirect:contextRelative:/spring/obra" />
-	<end-state id="Seguranca" 
-	 	view="externalRedirect:contextRelative:/spring/seguranca" />
+	<end-state id="Home" view="externalRedirect:contextRelative:/spring/home" />
+	<end-state id="Obras" view="externalRedirect:contextRelative:/spring/obra" />
+	<end-state id="Seguranca"
+		view="externalRedirect:contextRelative:/spring/seguranca" />
+	<end-state id="Emprestimo"
+		view="externalRedirect:contextRelative:/spring/emprestimo" />
 
 	<global-transitions>
 		<transition on="home" to="Home" />
 		<transition on="obras" to="Obras" />
 		<transition on="seguranca" to="Seguranca" />
+		<transition on="emprestimos" to="Emprestimo"></transition>
+		<transition on="seguranca" to="Seguranca"></transition>
 	</global-transitions>
 
 

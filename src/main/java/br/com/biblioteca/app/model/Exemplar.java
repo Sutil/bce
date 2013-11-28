@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import br.com.biblioteca.app.bean.StatusExemplar;
+
 import com.google.common.base.Objects;
 
 @Entity
@@ -26,6 +28,8 @@ public class Exemplar implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "obra_pk" , nullable = false)
 	private Obra obra;
+	
+	private StatusExemplar status = StatusExemplar.DISPONIVEL ;
 	
 	public Exemplar(){
 	}
@@ -78,5 +82,16 @@ public class Exemplar implements Serializable {
 		this.obra = obra;
 	}
 	
+	public boolean estaEmprestado(){
+		return StatusExemplar.EMPRESTADO.equals(this.status);
+	}
+	
+	public void emprestar(){
+		this.status = StatusExemplar.EMPRESTADO;
+	}
+	
+	public void devolver(){
+		this.status = StatusExemplar.DISPONIVEL;
+	}
 
 }

@@ -9,18 +9,22 @@
 	<ui:define name="content">
 
 		<h:form>
-			<div class="menu">
-				<h:commandLink action="perfis" >
-					<h:outputText value="Perfis" />
-					<i class="fa fa-wrench fa-4x" />
-				</h:commandLink>
+			<div class="bts">
+				Menu segurança
+				<ul>
+					<li><h:commandLink action="perfis">
+							<h:outputText value="Perfis" />
+							<i class="fa fa-wrench fa-4x" />
+						</h:commandLink></li>
 
 
-				<h:commandLink action="usuarios" >
-					<h:outputText value="Usuários" />
-					<i class="fa fa-user fa-4x" />
-				</h:commandLink>
-
+					<li>
+				<h:commandLink action="usuarios">
+						<h:outputText value="Usuários" />
+						<i class="fa fa-user fa-4x" />
+					</h:commandLink>
+					</li>
+					</ul>
 			</div>
 		</h:form>
 
