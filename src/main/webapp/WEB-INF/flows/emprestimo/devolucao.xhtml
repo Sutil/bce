@@ -16,7 +16,8 @@
 					<h:outputText
 						value="#{devolucaoBean.emprestimo.exemplar.obra.titulo} - #{devolucaoBean.emprestimo.exemplar.identificador}" />
 				</h:panelGrid>
-				<p:commandButton value="Devolver" action="#{devolucaoBean.devolver()}" update=":formdg"
+				<p:commandButton value="Devolver"
+					action="#{devolucaoBean.devolver()}" update=":formdg"
 					onclick="dgConfirma.show();"></p:commandButton>
 				<p:commandButton value="Cancelar" action="cancelar"></p:commandButton>
 			</p:panel>
@@ -24,15 +25,26 @@
 		</h:form>
 
 		<p:dialog header="Confirmar" widgetVar="dgConfirma" modal="true">
-			<h:form id="formdg"> 
+			<h:form id="formdg">
 				<h:panelGrid columns="1">
-				<h:outputText value="Esta devolução está com #{devolucaoBean.emprestimo.atraso()} dias de atraso"
-								rendered="#{devolucaoBean.emprestimo.atrasado}"></h:outputText>
-				<h:outputText value="gerando uma multa de: R$ #{devolucaoBean.multa.valor}"
-								rendered="#{devolucaoBean.emprestimo.atrasado}"></h:outputText>
+					<p:fieldset rendered="#{devolucaoBean.emprestimo.atrasado}">
+						<h:panelGrid columns="1">
+							<h:outputText
+								value="Esta devolução está com #{devolucaoBean.emprestimo.atraso()} dias de atraso" />
+							<h:outputText
+								value="gerando uma multa de: R$ #{devolucaoBean.multa.valor}" />
+						</h:panelGrid>
+						<p:spacer height="10" />
+						<h:panelGrid columns="2">
+							<h:outputText value="O usuário vai quitar este débito agora:" />
+							<p:selectBooleanCheckbox  value="#{devolucaoBean.pago}" rendered="#{devolucaoBean.emprestimo.atrasado}" />
+						</h:panelGrid>
+					</p:fieldset>
+
 					<h:outputText value="Deseja confirmar a devolução?"></h:outputText>
 				</h:panelGrid>
-				<p:commandButton value="Sim" onclick="dgConfirma.hide();" action="devolver"></p:commandButton>
+				<p:commandButton value="Sim" onclick="dgConfirma.hide();"
+					action="devolver" ></p:commandButton>
 				<p:commandButton value="Não" onclick="dgConfirma.hide();"></p:commandButton>
 			</h:form>
 

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	  xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+        parent="main-flow" >
+
+	
+	
+	<persistence-context />
+
+	<view-state id="menurelatorios">
+	    <transition on="relatorioemprestimos" to="relatorioemprestimos" />
+	    <transition on="reservas" to="reservas" />
+	    <transition on="devolucoes" to="devolucoes" />
+	    <transition on="atrasadas" to="emprestimosatrasados" />
+	</view-state>
+	
+	<view-state id="relatorioemprestimos">
+		<on-entry>
+			<evaluate expression="relatorioController.getEmprestadas()" result="viewScope.obras" result-type="dataModel" />
+		</on-entry>
+	   
+	</view-state>
+	
+	<view-state id="reservas">
+	   <on-entry>
+			<evaluate expression="relatorioController.getReservadas()" result="viewScope.obras" result-type="dataModel" />
+		</on-entry>
+	</view-state>
+	
+	<view-state id="devolucoes">
+	   
+	</view-state>
+	
+	<view-state id="maisretiradas">
+	   
+	</view-state>
+	
+	<view-state id="emprestimosativos">
+	   
+	</view-state>
+	
+	<view-state id="emprestimosatrasados">
+	   <on-entry>
+			<evaluate expression="relatorioController.getAtrasadas()" result="viewScope.emprestimos" result-type="dataModel" />
+		</on-entry>
+	</view-state>
+	
+	<view-state id="debitos">
+	   
+	</view-state>
+	
+	
+	
+	
+	
+</flow>

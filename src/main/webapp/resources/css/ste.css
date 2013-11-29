@@ -19,6 +19,8 @@ body {
 	display: inline-block;
 }
 
+
+
 /** navigation **/
 .navigation {
 	float: right;
@@ -96,12 +98,36 @@ body {
 	color: #fff;
 }
 
+
 .search {
 	width: 150px;
 	float: right;
 	list-style: none;
 	margin: 25px 0px 0px 30px;
 	padding: 0;
+}
+
+/* user */
+.user {
+	float: right;
+	display: inline-block;
+	margin: 28px 0 0 80px;;
+	padding: 0;
+	
+}
+
+.user a {
+	color: #fff;
+	text-decoration: none;
+	text-transform: capitalize;
+}
+
+.labelSair a {
+	color: #F00;
+}
+
+.labelSair i {
+	color: #F00;
 }
 
 .label {

@@ -91,6 +91,7 @@ public class EmprestimoController {
 	private void validaCotaEmprestimo(Usuario user) {
 		BooleanBuilder builder = new BooleanBuilder();
 		builder.and(QEmprestimo.emprestimo.usuario.eq(user));
+		builder.and(QEmprestimo.emprestimo.devolucao.isNull());
 		long count = emprestimoRepository.count(builder);
 		checkArgument(count < user.getPerfil().getCotaEmprestimo(), "Usuário excedeu a cota de empréstimos");
 	}
@@ -110,11 +111,14 @@ public class EmprestimoController {
 
 	public void devolver(DevolucaoBean bean) {
 		try {
-			Multa multa = bean.getEmprestimo().devolver();
+			Multa multa = bean.getMulta();
+			bean.getEmprestimo().devolver();
 			if (multa != null) {
+				multa.setPago(bean.isPago());
 				multaRepository.save(multa);
 			}
 			emprestimoRepository.save(bean.getEmprestimo());
+			exemplarRepository.save(bean.getEmprestimo().getExemplar());
 			addMessageInfo("Devolução gerada com sucesso!", "");
 		} catch (Exception e) {
 			addMessageError("Erro ao salvar", e.getMessage());

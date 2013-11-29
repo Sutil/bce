@@ -2,7 +2,7 @@ package br.com.biblioteca.app.bean;
 
 import java.io.Serializable;
 
-import br.com.biblioteca.app.model.QExemplar;
+import br.com.biblioteca.app.model.QObra;
 
 import com.google.common.base.Strings;
 import com.mysema.query.BooleanBuilder;
@@ -27,7 +27,7 @@ public class FiltroPesquisa implements Serializable {
 		System.out.println("buscando por:"+busca);
 		if(!Strings.isNullOrEmpty(busca)){
 			BooleanBuilder builder = new BooleanBuilder();
-			builder.or(QExemplar.exemplar.obra.titulo.contains(busca));
+			builder.and(QObra.obra.titulo.containsIgnoreCase(busca));
 			return builder;
 		}
 		return null;

@@ -10,16 +10,33 @@
 				<div id="header">
 					<div class="clearfix">
 						<div class="logo"></div>
-
+						
+						<div class="user" >
+							<h:outputLink id="user" >
+								<h:outputText value="#{homeController.user}" />
+								<i class="fa fa-user fa-1x" />
+							</h:outputLink>
+							<p:overlayPanel for="user" showEvent="mouseover" styleClass="labelSair" >
+								<h:outputLink value="/biblioteca/logout"  >
+									<h:outputText value="Sair" />
+									<i class="fa fa-sign-out fa-1x" />
+								</h:outputLink>
+							</p:overlayPanel>
+						</div>
+						
 						<ul class="navigation">
 							<li><h:commandLink action="home"><h:outputText value="Home" /> </h:commandLink> </li>
 							<li><h:commandLink action="obras"><h:outputText value="Obras" /> </h:commandLink> </li>
 							<li><h:commandLink action="emprestimos"><h:outputText value="Empréstimos" /> </h:commandLink> </li>
+							<li><h:commandLink action="relatorios"><h:outputText value="Relatórios" /> </h:commandLink> </li>
 							<li><h:commandLink action="seguranca"><h:outputText value="Segurança" /> </h:commandLink> </li>
 						</ul>
+						
+						
 
 					</div>
-
+					
+					
 				</div>
 			</h:form>
 			

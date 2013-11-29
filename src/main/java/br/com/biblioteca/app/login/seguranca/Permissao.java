@@ -9,6 +9,7 @@ import com.google.common.collect.Maps;
 
 public enum Permissao implements GrantedAuthority {
 
+	ROLE_USER("Permissões básicas"),
 	CRIAR_USUARIO("Criar Usuario"),
 	EDITAR_USUARIO("Editar Usuário"),
 	EXCLUIR_USUARIO("Excluir Usuário"),

@@ -11,10 +11,9 @@
 
 	<http pattern="/spring/javax.faces.resource/**" security="none" />
 	<http pattern="/rest/**" security="none" />
-	<http pattern="/spring/sutil**" security="none" />
 	<http>
 		<form-login login-page="/login.faces" />
-		<intercept-url pattern="/spring/manager/**" access="ROLE_USER" />
+		<intercept-url pattern="/spring/**" access="ROLE_USER" />
 		<logout logout-success-url="/login.faces" logout-url="/logout" />
 		<access-denied-handler error-page="/accessDenied.faces" />
 
@@ -26,7 +25,7 @@
 		<authentication-provider>
 		    <password-encoder hash="plaintext" />
 		    <user-service>
-		        <user name="admin" authorities="ROLE_USER, ROLE_ADMIN" password="admin"/>
+		        <user name="admin" password="admin" authorities="ROLE_USER, CRIAR_USUARIO, EDITAR_USUARIO, EXCLUIR_USUARIO,  CRIAR_PERFIL,  EDIATAR_PERFIL,  EXCLUIR_PERFIL, CRIAR_EXEMPLAR, EDITAR_EXEMPLAR, EXCLUIR_EXEMPLAR, EMPRESTAR_EXEMPLAR, CADASTRAR_RENOVACAO, REGISTRAR_DEVOLUCOES" />
 		    </user-service>
 		</authentication-provider>
 	</authentication-manager>

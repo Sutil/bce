@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/ui.xhtml">
+
+
+	<ui:define name="content">
+
+		<h:form>
+			<div class="bts">
+				Menu Relatórios
+				<ul>
+					<li><h:commandLink action="relatorioemprestimos">
+							<h:outputText value="Emprestimos" />
+							<i class="fa fa-book fa-4x" />
+						</h:commandLink></li>
+					<li><h:commandLink action="reservas">
+							<h:outputText value="Reservas" />
+							<i class="fa fa-book fa-4x" />
+						</h:commandLink></li>
+					<li><h:commandLink action="atrasadas">
+							<h:outputText value="Devoluções em atraso " />
+							<i class="fa fa-book fa-4x" />
+						</h:commandLink></li>
+					<li><h:commandLink action="usuarios">
+							<h:outputText value="Mais retiradas" />
+							<i class="fa fa-book fa-4x" />
+						</h:commandLink></li>
+					<li><h:commandLink action="usuarios">
+							<h:outputText value="Usuários com emprśtimo ativo" />
+							<i class="fa fa-users fa-4x" />
+						</h:commandLink></li>
+						<li><h:commandLink action="usuarios">
+							<h:outputText value="Usuários com devoluções em atraso" />
+							<i class="fa fa-users fa-4x" />
+						</h:commandLink></li>
+						<li><h:commandLink action="usuarios">
+							<h:outputText value="Usuários com débitos pendentes" />
+							<i class="fa fa-users fa-4x" />
+						</h:commandLink></li>
+						
+				</ul>
+			</div>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+

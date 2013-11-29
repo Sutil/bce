@@ -11,6 +11,8 @@
 		view="externalRedirect:contextRelative:/spring/seguranca" />
 	<end-state id="Emprestimo"
 		view="externalRedirect:contextRelative:/spring/emprestimo" />
+	<end-state id="Relatorios"
+		view="externalRedirect:contextRelative:/spring/relatorios" />
 
 	<global-transitions>
 		<transition on="home" to="Home" />
@@ -18,6 +20,7 @@
 		<transition on="seguranca" to="Seguranca" />
 		<transition on="emprestimos" to="Emprestimo"></transition>
 		<transition on="seguranca" to="Seguranca"></transition>
+		<transition on="relatorios" to="Relatorios"></transition>
 	</global-transitions>
 
 

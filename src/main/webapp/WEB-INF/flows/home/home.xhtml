@@ -4,28 +4,54 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/template/ui.xhtml">
-	
+
 	<ui:define name="content">
 		<p:messages autoUpdate="true" showSummary="true" showDetail="true" />
 		<h:form id="form">
-			
-			<p:panel header="Pesquisa no acervo" >
-				<p:inputText id="busca" value="#{filtro.busca}" size="80" ></p:inputText>
+
+			<p:panel header="Pesquisa no acervo">
+				<p:inputText id="busca" value="#{filtro.busca}" size="80"></p:inputText>
 				<p:watermark for="busca" value="Digite parte do nome da obra"></p:watermark>
 				<p:commandButton value="Pesquisar" action="pesquisar" update="@form" />
 			</p:panel>
-			
-			<p:dataTable emptyMessage="Não foram encontrados exemplares na sua pesquisa"
-						value="#{exemplares}" var="e" rowStyleClass="#{e.estaEmprestado() ? 'laranja' : 'verde' }" >
-				<f:facet name="header">Exemplares encontrados</f:facet>
-				<p:column headerText="Código" >#{e.identificador}</p:column>
-				<p:column headerText="Obra" >#{e.obra.titulo}</p:column>
-				<p:column headerText="Opções" >
-					<p:commandButton value="Reservar" rendered="#{e.estaEmprestado()}" />
+
+			<p:dataTable emptyMessage="Não foram obras obras na sua pesquisa"
+				value="#{obras}" var="obra"
+				rowStyleClass="#{obra.reservaDisponivel ? 'laranja' : 'verde' }">
+				<f:facet name="header">Obras encontrados</f:facet>
+				<p:column headerText="Obra">#{obra.titulo}</p:column>
+				<p:column headerText="Categoria">#{obra.titulo}</p:column>
+				<p:column headerText="Tipo">#{obra.disposicao.descricao}</p:column>
+				<p:column headerText="Autores">
+					<p:dataList value="#{obra.autores}" var="a">
+						<h:outputText value="#{a.sobrenome.toUpperCase()}, #{a.nome}" />
+					</p:dataList>
+				</p:column>
+				<p:column headerText="nº de exemplares">#{obra.exemplares.size()}</p:column>
+				<p:column headerText="Reservar">
+					<p:commandButton value="Reservar"
+						disabled="#{not obra.reservaDisponivel}"
+						title="#{obra.reservaDisponivel ? 'Reservar exemplar' : 'Só é possível reservar obras cujo os exemplares estão todos emprestados.'}"
+						action="reservar" oncomplete="dgReserva.show()"
+						update=":formReserva" />
 				</p:column>
 			</p:dataTable>
-			
 		</h:form>
+
+
+		<p:dialog header="Reserva" widgetVar="dgReserva" modal="true" >
+			<h:form id="formReserva">
+
+				<h:outputText
+					value="#{reserva.usuario.login}, você deseja confirmar a reserva da obra #{reserva.obra.titulo} ?" rendered="#{reserva != null}" />
+				<h:outputText value="O administrados do sistema não é um acadêmico e não pode fazer reservas. Entre com outro usuário!" rendered="#{reserva == null}" />
+				<h:panelGrid columns="2">
+					<p:commandButton value="Sim" onclick="dgReserva.hide();" rendered="#{reserva != null}" action="confirmaReserva" />
+					<p:commandButton value="Não" onclick="dgReserva.hide();" rendered="#{reserva != null}" />
+					<p:commandButton value="Ok" onclick="dgReserva.hide();" rendered="#{reserva == null}" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
 	</ui:define>
 </ui:composition>
 

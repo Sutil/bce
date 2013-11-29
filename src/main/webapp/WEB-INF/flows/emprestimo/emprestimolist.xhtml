@@ -35,7 +35,7 @@
 						<p:column headerText="Prazo">#{e.previsaoDeDevolucao}</p:column>
 						<p:column headerText="Usuario">#{e.usuario.login}</p:column>
 						<p:column headerText="Obra">#{e.exemplar.obra.titulo} - #{e.exemplar.identificador}</p:column>
-						<p:column headerText="Devolução"></p:column>
+						<p:column headerText="Devolução">#{e.devolucao}</p:column>
 						<p:column headerText="Opções">
 							<p:commandButton value="Devolver" action="devolver" icon="ui-icon-arrowreturnthick-1-w" rendered="#{not e.devolvido}" />
 						</p:column>

@@ -26,6 +26,8 @@ public class Multa implements Serializable {
 	
 	private BigDecimal valor;
 	
+	private boolean pago;
+	
 	@OneToOne
 	@JoinColumn(name = "emprestimo_fk")
 	private Emprestimo emprestimo;
@@ -55,6 +57,11 @@ public class Multa implements Serializable {
 		return Objects.hashCode(emprestimo);
 	}
 	
+	@Override
+	public String toString() {
+		return Objects.toStringHelper(this).add("valor", valor).toString();
+	}
+	
 	public Emprestimo getEmprestimo() {
 		return emprestimo;
 	}
@@ -65,6 +72,14 @@ public class Multa implements Serializable {
 	
 	public Long getId() {
 		return id;
+	}
+	
+	public boolean isPago() {
+		return pago;
+	}
+	
+	public void setPago(boolean pago) {
+		this.pago = pago;
 	}
 
 	

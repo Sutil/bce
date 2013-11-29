@@ -19,6 +19,7 @@ import org.hibernate.annotations.Type;
 
 import br.com.biblioteca.app.bean.ObraBean;
 
+import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 
@@ -88,6 +89,30 @@ public class Obra implements Serializable {
 		checkArgument(!Strings.isNullOrEmpty(bean.getTitulo()), "Inform o título da Obra");
 		return new Obra(bean);
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Obra){
+			Obra other = (Obra) obj;
+			return Objects.equal(this.titulo, other.titulo);
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(titulo);
+	}
+	
+	@Override
+	public String toString() {
+		return Objects.toStringHelper(this).add("titulo", titulo).toString();
+	}
+	
+	public boolean isReservaDisponivel(){
+		return DisposicaoParaEmprestimo.DISPONIVEL.equals(this.disposicao) &&
+				getQuantidadeDisponiveis() == 0;
+	}
 
 	public Long getId() {
 		return id;
@@ -111,6 +136,26 @@ public class Obra implements Serializable {
 
 	public List<Exemplar> getExemplares() {
 		return exemplares;
+	}
+	
+	public int getQuantidadeDisponiveis(){
+		int count = 0;
+		for(Exemplar e: exemplares){
+			if(!e.estaEmprestado()){
+				count++;
+			}
+		}
+		return count;
+	}
+	
+	public int getQuantidadeEmprestados(){
+		int count = 0;
+		for(Exemplar e: exemplares){
+			if(e.estaEmprestado()){
+				count++;
+			}
+		}
+		return count;
 	}
 
 }

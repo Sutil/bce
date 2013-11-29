@@ -4,14 +4,21 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
         parent="main-flow">
-
+	
+	<persistence-context />
 
 	<view-state id="home">
 		<on-entry>
 			<evaluate expression="homeController.newFiltro()" result="viewScope.filtro"/>
 		</on-entry>
 		<transition on="pesquisar" >
-			<evaluate expression="homeController.pesquisar(filtro)" result="viewScope.exemplares" result-type="dataModel" />
+			<evaluate expression="homeController.pesquisar(filtro)" result="viewScope.obras" result-type="dataModel" />
+		</transition>
+		<transition on="reservar" >
+			<evaluate expression="homeController.reservar(obras.selectedRow)" result="viewScope.reserva"  />
+		</transition>
+		<transition on="confirmaReserva" >
+			<evaluate expression="homeController.reservar(reserva)" />
 		</transition>
 		
 	</view-state>

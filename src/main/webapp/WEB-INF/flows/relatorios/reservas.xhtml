@@ -1,0 +1,24 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/ui.xhtml">
+	<ui:define name="content">
+
+		<h:form>
+
+			<p:dataTable emptyMessage="Nenhum empréstimo encontrado."
+				value="#{obras}" var="obra">
+				<p:column headerText="Id"><h:outputText value="#{obra.obra.id}" /></p:column>
+				<p:column headerText="titulo">#{obra.obra.titulo}</p:column>
+				<p:column headerText="qtde reservas">#{obra.reservas}</p:column>
+			</p:dataTable>
+		</h:form>
+
+
+
+
+	</ui:define>
+</ui:composition>
+

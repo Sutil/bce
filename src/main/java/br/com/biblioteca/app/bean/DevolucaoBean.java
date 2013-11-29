@@ -15,6 +15,8 @@ public class DevolucaoBean implements Serializable {
 	
 	private Multa multa;
 	
+	private boolean pago;
+	
 	private DevolucaoBean(Emprestimo emprestimo){
 		this.emprestimo = emprestimo;
 	}
@@ -33,7 +35,16 @@ public class DevolucaoBean implements Serializable {
 	}
 	
 	public void devolver(){
-		this.multa = emprestimo.devolver();
+		this.multa = emprestimo.preparaDevolucao();
+		System.out.println(multa);
+	}
+	
+	public boolean isPago() {
+		return pago;
+	}
+	
+	public void setPago(boolean pago) {
+		this.pago = pago;
 	}
 	
 	

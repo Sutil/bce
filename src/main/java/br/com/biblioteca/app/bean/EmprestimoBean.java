@@ -24,7 +24,6 @@ public class EmprestimoBean implements Serializable {
 				exemplar != null && 
 				exemplar.getObra().getDisposicao().equals(DisposicaoParaEmprestimo.DISPONIVEL) &&
 				!exemplar.estaEmprestado();
-		System.out.println(a);
 		if(usuario == null){
 			sb.append("Usuário não selecionado\n");
 		}

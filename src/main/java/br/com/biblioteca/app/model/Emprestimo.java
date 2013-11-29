@@ -76,13 +76,22 @@ public class Emprestimo implements Serializable {
 		return Objects.hashCode(usuario, exemplar, retirada);
 	}
 	
+	@Override
+	public String toString() {
+		return Objects.toStringHelper(this).add("id", id)
+				.add("user", usuario)
+				.add("retirada", retirada)
+				.add("devolucao", devolucao).toString();
+	}
+	
 	public Multa devolver(){
+		Multa multa = null;
 		if(isAtrasado()){
-			Multa multa = Multa.newInstance(this);
-			this.devolucao = new LocalDate();
-			return multa;
+			multa = Multa.newInstance(this);
 		}
-		return null;
+		this.exemplar.devolver();
+		this.devolucao = new LocalDate();
+		return multa;
 	}
 
 	public Long getId() {
@@ -127,6 +136,14 @@ public class Emprestimo implements Serializable {
 			milis = new Date().getTime() - retirada.toDate().getTime();
 		}
 		return milis / (1000*60*60*24);
+	}
+
+	public Multa preparaDevolucao() {
+		if(isAtrasado()){
+			Multa multa = Multa.newInstance(this);
+			return multa;
+		}
+		return null;
 	}
 
 }
