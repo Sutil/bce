@@ -7,12 +7,17 @@
 	<ui:define name="content">
 
 		<h:form>
-
-			<p:dataTable emptyMessage="Nenhum empréstimo encontrado."
-				value="#{obras}" var="obra">
-				<p:column headerText="Id"><h:outputText value="#{obra.id}" /></p:column>
-				<p:column headerText="Prazo">#{obra.titulo}</p:column>
-
+			usuario
+			<p:inputText value="#{filtro.usuario}" />
+			
+			<p:commandButton value="pesquisar" action="pesquisar" update="table"  />
+			
+			<p:dataTable id="table" emptyMessage="Nenhum empréstimo encontrado."
+				value="#{emprestimos}" var="e">
+				<p:column headerText="Id"><h:outputText value="#{e.id}" /></p:column>
+				<p:column headerText="Usuario">#{e.usuario.login}</p:column>
+				<p:column headerText="Categoria" >#{e.exemplar.obra.categoria.descricao}</p:column>
+				
 			</p:dataTable>
 		</h:form>
 

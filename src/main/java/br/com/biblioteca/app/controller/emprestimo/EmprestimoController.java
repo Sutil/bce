@@ -1,4 +1,4 @@
-package br.com.biblioteca.app.controller;
+package br.com.biblioteca.app.controller.emprestimo;
 
 import static com.google.common.base.Preconditions.checkArgument;
 

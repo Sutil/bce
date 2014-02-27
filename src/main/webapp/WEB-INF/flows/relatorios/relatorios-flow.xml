@@ -18,8 +18,11 @@
 	
 	<view-state id="relatorioemprestimos">
 		<on-entry>
-			<evaluate expression="relatorioController.getEmprestadas()" result="viewScope.obras" result-type="dataModel" />
+			<evaluate expression="relatorioEmprestimoController.newFiltro()" result="viewScope.filtro" />
 		</on-entry>
+		<transition on="pesquisar">
+			<evaluate expression="relatorioEmprestimoController.pesquisar(filtro)" result="viewScope.emprestimos" />
+		</transition>
 	   
 	</view-state>
 	
